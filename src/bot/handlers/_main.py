@@ -19,7 +19,7 @@ async def start(message: types.Message):
         labels = db.get_labels(dt_from, dt_upto, group_type)
         dataset = await db.get_dataset(dt_from, dt_upto, group_type, labels)
 
-        m = str({'dataset': dataset, 'labels': labels})
+        m = str({'dataset': dataset, 'labels': labels}).replace('\'', '\"')
         await message.answer(text=m)
     except json.decoder.JSONDecodeError:
         await message.answer(text='Введите правильный формат данных')
